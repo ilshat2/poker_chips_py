@@ -6,6 +6,7 @@ redistribute.py
 """
 
 from typing import List
+import statistics
 
 
 def min_moves(chips: List[int]) -> int:
@@ -19,12 +20,15 @@ def min_moves(chips: List[int]) -> int:
         raise ValueError("Нельзя поровну распределить фишки")
     avg = total // n
 
-    moves = 0
+    prefixes = []
     prefix = 0
-    # проходим по границам 0-1, 1-2, ..., n-2–n-1
-    for i in range(n - 1):
-        prefix += chips[i] - avg
-        moves += abs(prefix)
+    for c in chips:
+        prefix += c - avg
+        prefixes.append(prefix)
+    # Последний элемент prefixes[-1] будет 0, как и положено
+
+    m = int(statistics.median(prefixes))
+    moves = sum(abs(p - m) for p in prefixes)
     return moves
 
 
