@@ -29,7 +29,14 @@ def min_moves(chips: List[int]) -> int:
 
 
 def main():
-    pass
+    tests = [
+        ([1, 5, 9, 10, 5], 12),
+        ([1, 2, 3], 1),
+        ([0, 1, 1, 1, 1, 1, 1, 1, 1, 2], 1),
+    ]
+    for chips, expected in tests:
+        result = min_moves(chips)
+        print(f"{chips} → {result} (ожидалось {expected})")
 
 
 if __name__ == "__main__":
